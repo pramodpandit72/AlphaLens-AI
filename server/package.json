@@ -1,0 +1,31 @@
+{
+  "name": "alphalens-ai-server",
+  "version": "1.0.0",
+  "description": "AlphaLens AI - Backend API Server",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "ai",
+    "investment",
+    "langchain",
+    "gemini"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@langchain/core": "^1.2.1",
+    "@langchain/google-genai": "^2.2.0",
+    "@tavily/core": "^0.7.6",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "langchain": "^1.5.2",
+    "yahoo-finance2": "^3.15.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
