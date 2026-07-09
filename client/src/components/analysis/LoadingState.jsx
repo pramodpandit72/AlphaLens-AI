@@ -26,11 +26,11 @@ export default function LoadingState() {
         <div className="text-center mb-12">
           {/* Spinning orb */}
           <div className="relative w-16 h-16 mx-auto mb-6">
-            <div className="absolute inset-0 rounded-2xl bg-teal-600 animate-pulse shadow-md" />
+            <div className="absolute inset-0 rounded-2xl bg-sky-600 animate-pulse shadow-md" />
             <div className="absolute inset-1.5 rounded-xl bg-white flex items-center justify-center text-2xl">
               {loadingSteps[activeStep].icon}
             </div>
-            <div className="absolute -inset-1 rounded-[20px] border-2 border-transparent border-t-teal-500 animate-spin" />
+            <div className="absolute -inset-1 rounded-[20px] border-2 border-transparent border-t-sky-500 animate-spin" />
           </div>
           <h2 className="text-xl font-bold text-slate-900 mb-1">Analyzing Company</h2>
           <p className="text-sm text-slate-500">AI agents are researching in real-time…</p>
@@ -45,7 +45,7 @@ export default function LoadingState() {
                 index < activeStep
                   ? 'bg-emerald-50 text-emerald-700'
                   : index === activeStep
-                  ? 'bg-teal-50 text-teal-700 shadow-xs border border-teal-100'
+                  ? 'bg-sky-50 text-sky-700 shadow-xs border border-sky-100'
                   : 'text-slate-400 opacity-50'
               }`}
             >
@@ -55,7 +55,7 @@ export default function LoadingState() {
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 ) : index === activeStep ? (
-                  <div className="w-3 h-3 bg-teal-500 rounded-full animate-pulse" />
+                  <div className="w-3 h-3 bg-sky-500 rounded-full animate-pulse" />
                 ) : (
                   <div className="w-2 h-2 bg-current rounded-full" />
                 )}

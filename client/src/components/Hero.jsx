@@ -19,21 +19,17 @@ export default function Hero() {
   }
 
   return (
-    <section className="bg-white py-28 md:py-36">
+    <section className="bg-white py-16 md:py-20">
       <div className="max-w-6xl mx-auto px-6 md:px-8">
         <div className="max-w-3xl mx-auto text-center">
 
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-teal-50 border border-teal-100 rounded-full text-xs font-medium text-teal-700 mb-10">
-            <span className="w-1.5 h-1.5 bg-teal-500 rounded-full" />
-            Powered by Gemini 2.5 Flash
-          </div>
+
 
           {/* Heading */}
           <h1 className="text-4xl md:text-6xl font-bold text-slate-900 leading-tight tracking-tight mb-6">
             AI-Powered Stock Research
             <br />
-            <span className="text-teal-600">in Seconds</span>
+            <span className="text-sky-600">in Seconds</span>
           </h1>
 
           {/* Subtitle */}
@@ -43,7 +39,7 @@ export default function Hero() {
 
           {/* Search box */}
           <form onSubmit={handleAnalyze} className="mb-6">
-            <div className="flex items-center gap-3 p-2.5 bg-white border border-slate-200 rounded-xl shadow-sm focus-within:border-teal-500 focus-within:ring-2 focus-within:ring-teal-100 transition-all">
+            <div className="flex items-center gap-3 p-2.5 bg-white border border-slate-200 rounded-xl shadow-sm focus-within:border-sky-500 focus-within:ring-2 focus-within:ring-sky-100 transition-all">
               <div className="pl-2 text-slate-400">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="11" cy="11" r="8" />
@@ -62,7 +58,7 @@ export default function Hero() {
                 id="hero-analyze-button"
                 type="submit"
                 disabled={!company.trim()}
-                className="inline-flex items-center justify-center gap-2 py-3 px-7 text-sm bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                className="inline-flex items-center justify-center gap-2 py-3 px-7 text-sm bg-sky-600 text-white font-semibold rounded-lg hover:bg-sky-700 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Analyze
               </button>
@@ -77,7 +73,7 @@ export default function Hero() {
                 key={name}
                 type="button"
                 onClick={() => handleTagClick(name)}
-                className="px-3 py-1 text-xs font-medium text-slate-600 bg-slate-50 border border-slate-200 rounded-lg hover:border-teal-300 hover:text-teal-700 hover:bg-teal-50 transition-colors cursor-pointer"
+                className="px-3 py-1 text-xs font-medium text-slate-600 bg-slate-50 border border-slate-200 rounded-lg hover:border-sky-300 hover:text-sky-700 hover:bg-sky-50 transition-colors cursor-pointer"
               >
                 {name}
               </button>

@@ -15,7 +15,7 @@ const CompanyCard = memo(function CompanyCard({ data }) {
   return (
     <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden h-full">
       {/* Header accent bar */}
-      <div className="h-1.5 bg-teal-600" />
+      <div className="h-1.5 bg-sky-600" />
       
       <div className="p-8 md:p-9">
         <div className="flex items-start justify-between gap-4 mb-7">
@@ -23,7 +23,7 @@ const CompanyCard = memo(function CompanyCard({ data }) {
             <h2 className="text-2xl font-bold text-slate-900 leading-tight">{company}</h2>
             <div className="flex items-center gap-2 mt-2 flex-wrap">
               {ticker && (
-                <span className="inline-flex items-center px-2.5 py-0.5 bg-teal-50 text-teal-700 text-xs font-bold rounded-lg border border-teal-100 tracking-wider">
+                <span className="inline-flex items-center px-2.5 py-0.5 bg-sky-50 text-sky-700 text-xs font-bold rounded-lg border border-sky-100 tracking-wider">
                   {ticker}
                 </span>
               )}
@@ -34,7 +34,7 @@ const CompanyCard = memo(function CompanyCard({ data }) {
               )}
             </div>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-teal-50 border border-teal-100 flex items-center justify-center text-teal-600 flex-shrink-0">
+          <div className="w-12 h-12 rounded-xl bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600 flex-shrink-0">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z" />
               <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2" />

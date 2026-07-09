@@ -18,12 +18,12 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-28 md:py-36 bg-white">
+    <section id="how-it-works" className="py-16 md:py-20 bg-white">
       <div className="max-w-6xl mx-auto px-6 md:px-8">
 
         {/* Header */}
-        <div className="text-center mb-16 md:mb-20">
-          <p className="text-xs font-semibold text-teal-600 uppercase tracking-widest mb-3">How It Works</p>
+        <div className="text-center mb-10 md:mb-12">
+          <p className="text-xs font-semibold text-sky-600 uppercase tracking-widest mb-3">How It Works</p>
           <h2 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
             Three steps to an instant report
           </h2>
@@ -34,7 +34,7 @@ export default function HowItWorks() {
           {steps.map((step, index) => (
             <div key={index} className="text-center px-5">
               {/* Step number */}
-              <div className="w-12 h-12 mx-auto mb-6 bg-teal-50 border border-teal-100 rounded-xl flex items-center justify-center text-teal-600 font-bold text-sm">
+              <div className="w-12 h-12 mx-auto mb-6 bg-cyan-50 border border-cyan-400 rounded-xl flex items-center justify-center text-cyan-600 font-bold text-sm">
                 {step.number}
               </div>
               <h3 className="text-base font-semibold text-slate-900 mb-3">{step.title}</h3>

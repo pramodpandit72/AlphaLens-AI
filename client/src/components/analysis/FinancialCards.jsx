@@ -4,13 +4,13 @@ const FinancialCards = memo(function FinancialCards({ financials }) {
   if (!financials) return null
 
   const metrics = [
-    { label: 'Revenue',         value: financials.revenue,       icon: '💵', color: 'text-sky-600',    bg: 'bg-sky-50',     border: 'border-sky-100' },
+    { label: 'Revenue',         value: financials.revenue,       icon: '💰', color: 'text-emerald-600', bg: 'bg-emerald-50', border: 'border-emerald-100' },
     { label: 'Net Profit',      value: financials.netProfit,     icon: '📊', color: 'text-emerald-600', bg: 'bg-emerald-50', border: 'border-emerald-100' },
-    { label: 'Market Cap',      value: financials.marketCap,     icon: '🏦', color: 'text-teal-600',   bg: 'bg-teal-50',    border: 'border-teal-100' },
-    { label: 'P/E Ratio',       value: financials.peRatio,       icon: '📐', color: 'text-violet-600', bg: 'bg-violet-50',  border: 'border-violet-100' },
-    { label: 'EPS',             value: financials.eps,           icon: '💹', color: 'text-amber-600',  bg: 'bg-amber-50',   border: 'border-amber-100' },
-    { label: 'Revenue Growth',  value: financials.revenueGrowth, icon: '📈', color: 'text-emerald-600', bg: 'bg-emerald-50', border: 'border-emerald-100' },
-    { label: 'Profit Margin',   value: financials.profitMargin,  icon: '💎', color: 'text-teal-600',   bg: 'bg-teal-50',    border: 'border-teal-100' },
+    { label: 'Market Cap',      value: financials.marketCap,     icon: '🏦', color: 'text-sky-600',   bg: 'bg-sky-50',    border: 'border-sky-100' },
+    { label: 'P/E Ratio',       value: financials.peRatio,       icon: '⚖️', color: 'text-blue-600',    bg: 'bg-blue-50',    border: 'border-blue-100' },
+    { label: 'EPS',             value: financials.eps,           icon: '💵', color: 'text-violet-600',  bg: 'bg-violet-50',  border: 'border-violet-100' },
+    { label: 'Debt to Equity',  value: financials.debtToEquity,  icon: '📉', color: 'text-rose-600',    bg: 'bg-rose-50',    border: 'border-rose-100' },
+    { label: 'Profit Margin',   value: financials.profitMargin,  icon: '💎', color: 'text-sky-600',   bg: 'bg-sky-50',    border: 'border-sky-100' },
   ]
 
   return (

@@ -12,14 +12,14 @@ const ReasoningSection = memo(function ReasoningSection({ reason }) {
           <path d="M12 8h.01" />
         </svg>
         <h3 className="text-base font-bold text-slate-900">AI Reasoning</h3>
-        <span className="ml-auto inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-teal-50 text-teal-700 text-xs font-semibold rounded-full border border-teal-100">
-          <span className="w-1.5 h-1.5 bg-teal-500 rounded-full animate-pulse" />
-          Gemini Analysis
+        <span className="ml-auto inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-sky-50 text-sky-700 text-xs font-semibold rounded-full border border-sky-100">
+          <span className="w-1.5 h-1.5 bg-sky-500 rounded-full animate-pulse" />
+          AI Reasoning
         </span>
       </div>
       <div className="p-7">
-        <p className="text-sm text-slate-600 leading-relaxed border-l-4 border-teal-200 pl-4 italic bg-teal-50/30 py-3 pr-4 rounded-r-xl">
-          {reason}
+        <p className="text-sm text-slate-600 leading-relaxed border-l-4 border-sky-200 pl-4 italic bg-sky-50/30 py-3 pr-4 rounded-r-xl">
+          "{reason}"
         </p>
       </div>
     </div>

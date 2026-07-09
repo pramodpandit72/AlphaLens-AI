@@ -21,12 +21,12 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200">
-      <div className="max-w-6xl mx-auto px-6 md:px-8 flex items-center justify-between h-20 gap-4">
+    <nav className="bg-gray-200 sticky top-0 z-50 backdrop-blur-sm border-b border-slate-200">
+      <div className="max-w-6xl mx-auto px-6 md:px-8 flex items-center justify-between h-15 gap-4">
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 no-underline">
-          <div className="w-8 h-8 rounded-lg bg-teal-600 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-lg bg-sky-600 flex items-center justify-center">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <polygon points="12 2 2 7 12 12 22 7 12 2" />
               <polyline points="2 17 12 22 22 17" />
@@ -34,14 +34,14 @@ export default function Navbar() {
             </svg>
           </div>
           <span className="text-base font-bold text-slate-900">
-            AlphaLens <span className="text-teal-600">AI</span>
+            AlphaLens <span className="text-sky-600">AI</span>
           </span>
         </Link>
 
         {/* Search bar — analysis page only */}
         {isAnalysisPage && (
           <form onSubmit={handleSubmit} className="flex-1 max-w-sm mx-8 hidden sm:block">
-            <div className="flex items-center gap-2 px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus-within:border-teal-500 focus-within:bg-white transition-colors">
+            <div className="flex items-center gap-2 px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg focus-within:border-sky-500 focus-within:bg-white transition-colors">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="11" cy="11" r="8" />
                 <path d="m21 21-4.3-4.3" />
@@ -69,12 +69,6 @@ export default function Navbar() {
               </a>
             </>
           )}
-          <Link
-            to="/"
-            className="text-sm font-semibold text-white bg-teal-600 hover:bg-teal-700 px-5 py-2.5 rounded-lg transition-colors no-underline"
-          >
-            Get Started
-          </Link>
         </div>
 
       </div>

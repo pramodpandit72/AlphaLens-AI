@@ -51,12 +51,12 @@ const features = [
 
 export default function Features() {
   return (
-    <section id="features" className="py-28 md:py-36 bg-slate-50">
+    <section id="features" className="py-16 md:py-20 bg-slate-50">
       <div className="max-w-6xl mx-auto px-6 md:px-8">
 
         {/* Header */}
-        <div className="text-center mb-16 md:mb-20">
-          <p className="text-xs font-semibold text-teal-600 uppercase tracking-widest mb-3">Features</p>
+        <div className="text-center mb-10 md:mb-12">
+          <p className="text-xs font-semibold text-sky-600 uppercase tracking-widest mb-3">Features</p>
           <h2 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
             Everything you need to research a stock
           </h2>
@@ -67,9 +67,9 @@ export default function Features() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="bg-white border border-slate-200 rounded-xl p-8 hover:border-slate-300 hover:shadow-sm transition-all duration-200"
+              className="bg-white border border-gray-500 rounded-xl p-8 hover:border-slate-300 hover:shadow-sm transition-all duration-200"
             >
-              <div className="w-10 h-10 bg-teal-50 border border-teal-100 rounded-lg flex items-center justify-center text-teal-600 mb-6">
+              <div className="w-10 h-10 bg-emerald-50 border border-emerald-100 rounded-lg flex items-center justify-center text-emerald-600 mb-6">
                 {feature.icon}
               </div>
               <h3 className="text-base font-semibold text-slate-900 mb-3">{feature.title}</h3>

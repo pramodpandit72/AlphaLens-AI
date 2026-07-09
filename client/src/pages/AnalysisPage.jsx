@@ -45,7 +45,7 @@ export default function AnalysisPage() {
           <div className="flex items-center justify-center gap-3">
             <button
               onClick={() => analyze(company)}
-              className="inline-flex items-center justify-center gap-2 py-2.5 px-6 text-sm bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 py-2.5 px-6 text-sm bg-sky-600 text-white font-semibold rounded-lg hover:bg-sky-700 transition-colors cursor-pointer"
             >
               Try Again
             </button>
@@ -72,7 +72,7 @@ export default function AnalysisPage() {
             <div className="max-w-2xl">
               <button
                 onClick={() => navigate('/')}
-                className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-teal-600 transition-colors mb-3 cursor-pointer group"
+                className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-sky-600 transition-colors mb-3 cursor-pointer group"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:-translate-x-0.5 transition-transform">
                   <path d="m12 19-7-7 7-7" />
@@ -83,7 +83,7 @@ export default function AnalysisPage() {
               <h1 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
                 Analysis Report
               </h1>
-              <p className="text-sm text-slate-500 mt-1">AI-generated research for <span className="font-semibold text-teal-600">{data.company}</span></p>
+              <p className="text-sm text-slate-500 mt-1">AI-generated research for <span className="font-semibold text-sky-600">{data.company}</span></p>
             </div>
             <button
               onClick={() => window.print()}
@@ -130,7 +130,7 @@ export default function AnalysisPage() {
           <div className="text-center py-6">
             <button
               onClick={() => navigate('/')}
-              className="inline-flex items-center justify-center gap-2 py-3 px-8 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 py-3 px-8 bg-sky-600 text-white font-semibold rounded-lg hover:bg-sky-700 transition-colors cursor-pointer"
             >
               Analyze Another Company
             </button>
