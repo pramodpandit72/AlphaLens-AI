@@ -1,40 +1,57 @@
-const severityConfig = {
-  high: { color: 'bg-pass-light text-pass-dark border-pass/20', dot: 'bg-pass' },
-  medium: { color: 'bg-amber-50 text-amber-700 border-amber-200', dot: 'bg-amber-500' },
-  low: { color: 'bg-invest-light text-invest-dark border-invest/20', dot: 'bg-invest' },
+import { memo } from 'react'
+
+const severityStyles = {
+  HIGH:   { bar: 'bg-rose-500',   badge: 'bg-rose-100 text-rose-700 border-rose-200',   card: 'border-l-rose-400' },
+  MEDIUM: { bar: 'bg-amber-400',  badge: 'bg-amber-100 text-amber-700 border-amber-200', card: 'border-l-amber-400' },
+  LOW:    { bar: 'bg-sky-400',    badge: 'bg-sky-100 text-sky-700 border-sky-200',       card: 'border-l-sky-400' },
 }
 
-export default function RiskAnalysis({ risks }) {
+const severityWidth = { HIGH: '85%', MEDIUM: '50%', LOW: '25%' }
+
+const RiskAnalysis = memo(function RiskAnalysis({ risks }) {
   if (!risks || risks.length === 0) return null
 
+  const highCount = risks.filter((r) => r.severity === 'HIGH').length
+
   return (
-    <div>
-      <h3 className="text-lg font-semibold text-text-primary mb-4 flex items-center gap-2">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden h-full">
+      {/* Header */}
+      <div className="px-6 py-5 border-b border-slate-100 flex items-center gap-2">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
           <path d="M12 9v4" />
           <path d="M12 17h.01" />
         </svg>
-        Risk Analysis
-      </h3>
-      <div className="space-y-3">
+        <h3 className="text-base font-bold text-slate-900">Risk Analysis</h3>
+        {highCount > 0 && (
+          <span className="ml-auto px-2 py-0.5 bg-rose-50 text-rose-600 text-[10px] font-bold rounded-full border border-rose-100">
+            {highCount} High Risk
+          </span>
+        )}
+      </div>
+
+      <div className="p-6 space-y-4">
         {risks.map((risk, index) => {
-          const config = severityConfig[risk.severity] || severityConfig.medium
+          const severity = (risk.severity || 'MEDIUM').toUpperCase()
+          const styles = severityStyles[severity] || severityStyles.MEDIUM
+
           return (
-            <div key={index} className={`glass-card p-5 border ${config.color.split(' ').pop()}`}>
-              <div className="flex items-start gap-3">
-                <span className={`flex-shrink-0 w-2 h-2 mt-2 rounded-full ${config.dot}`} />
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-sm font-semibold text-text-primary">{risk.category}</span>
-                    <span className={`px-2 py-0.5 text-xs font-medium rounded-md capitalize ${config.color}`}>
-                      {risk.severity}
-                    </span>
-                  </div>
-                  <p className="text-sm text-text-secondary leading-relaxed">
-                    {risk.description}
-                  </p>
-                </div>
+            <div
+              key={index}
+              className={`p-4 bg-slate-50 rounded-xl border-l-4 border border-slate-200/60 transition-all duration-200 hover:bg-slate-100/60 hover:shadow-xs ${styles.card}`}
+            >
+              <div className="flex items-start justify-between gap-3 mb-2">
+                <p className="text-sm font-semibold text-slate-900 leading-snug">{risk.category}</p>
+                <span className={`flex-shrink-0 px-2 py-0.5 text-[10px] font-bold rounded-full border uppercase tracking-wider ${styles.badge}`}>
+                  {severity}
+                </span>
+              </div>
+              <p className="text-xs text-slate-600 leading-relaxed mb-3">{risk.description}</p>
+              <div className="w-full h-1 bg-slate-200/50 rounded-full overflow-hidden">
+                <div
+                  className={`h-full rounded-full transition-all duration-700 ease-out ${styles.bar}`}
+                  style={{ width: severityWidth[severity] || '50%' }}
+                />
               </div>
             </div>
           )
@@ -42,4 +59,6 @@ export default function RiskAnalysis({ risks }) {
       </div>
     </div>
   )
-}
+})
+
+export default RiskAnalysis

@@ -30,6 +30,7 @@ export const runAnalysis = async (companyName, searchResults, financialData) => 
     temperature: 0.3,
     maxOutputTokens: 4096,
     maxRetries: 1,
+    responseMimeType: 'application/json',
   });
 
   // Step 4: Invoke the model
@@ -48,7 +49,13 @@ export const runAnalysis = async (companyName, searchResults, financialData) => 
 const parseAnalysisResponse = (content) => {
   let text = content;
 
-  // Remove markdown code blocks if present
+  // Extract only the JSON object block from the response to discard any wrapper conversational text
+  const jsonMatch = text.match(/\{[\s\S]*\}/);
+  if (jsonMatch) {
+    text = jsonMatch[0];
+  }
+
+  // Remove markdown code blocks if present (fallback)
   if (text.includes('```json')) {
     text = text.replace(/```json\s*/g, '').replace(/```\s*/g, '');
   } else if (text.includes('```')) {
@@ -85,7 +92,21 @@ const parseAnalysisResponse = (content) => {
     return parsed;
   } catch (error) {
     console.error('Failed to parse AI response:', error.message);
-    console.error('Raw response:', text.substring(0, 500));
+    
+    // Log context around syntax error position if possible
+    const match = error.message.match(/at position (\d+)/);
+    if (match) {
+      const pos = parseInt(match[1], 10);
+      const start = Math.max(0, pos - 100);
+      const end = Math.min(text.length, pos + 100);
+      console.error(`Context around error (chars ${start}-${end}):`);
+      console.error('----------------------------------------');
+      console.error(text.substring(start, end));
+      console.error('----------------------------------------');
+    } else {
+      console.error('Raw response (first 1000 chars):', text.substring(0, 1000));
+    }
+    
     throw new Error('Failed to parse AI analysis. Please try again.');
   }
 };

@@ -1,0 +1,93 @@
+```json
+{
+  "company": "Tesla, Inc.",
+  "ticker": "TSLA",
+  "industry": "Auto Manufacturers",
+  "basicInfo": {
+    "ceo": "Elon Reeve Musk",
+    "headquarters": "Austin, Texas, United States",
+    "founded": "2003",
+    "employees": "140,473"
+  },
+  "financials": {
+    "revenue": "$97.88B",
+    "netProfit": "$3.86B",
+    "marketCap": "$1.48T",
+    "peRatio": 371.75,
+    "eps": "$1.06",
+    "revenueGrowth": "15.80%",
+    "profitMargin": "3.95%"
+  },
+  "strengths": [
+    "Market Leadership & Brand Strength — Tesla maintains a strong global brand and is a leading player in the electric vehicle market.",
+    "Integrated Ecosystem — The company offers a comprehensive suite of products including EVs, charging infrastructure, solar products, and battery storage systems.",
+    "Innovation & Technology — Tesla is at the forefront of advancements in EV technology, autonomous driving (robotaxi), and battery solutions.",
+    "Strong Cash Position — With $44.74B in total cash against $15.89B in total debt, Tesla possesses significant financial flexibility.",
+    "Direct-to-Consumer Model — This strategy provides greater control over the sales experience and direct customer relationships."
+  ],
+  "weaknesses": [
+    "High Valuation — An extremely high P/E ratio of 371.75 suggests significant future growth is already priced into the stock, making it vulnerable to any underperformance.",
+    "Moderate Profit Margin — A profit margin of 3.95% is relatively low for a company positioned as a technology leader, potentially impacted by price cuts and scaling costs.",
+    "Key Person Risk — The company's strong reliance on CEO Elon Musk introduces a degree of key person risk due to his multiple ventures and public persona."
+  ],
+  "risks": [
+    {
+      "category": "Competition Risk",
+      "description": "Increasing competition from both established automakers and new EV startups globally could erode Tesla's market share and pricing power.",
+      "severity": "high"
+    },
+    {
+      "category": "Market Risk",
+      "description": "Tesla's high valuation makes its stock highly susceptible to shifts in market sentiment, interest rate changes, and any slowdown in overall EV demand.",
+      "severity": "high"
+    },
+    {
+      "category": "Regulatory Risk",
+      "description": "Changes in government incentives for EVs, emissions standards, or autonomous driving regulations could negatively impact sales and operational costs.",
+      "severity": "medium"
+    },
+    {
+      "category": "Supply Chain Risk",
+      "description": "Dependence on global supply chains for critical components, particularly batteries, can lead to production disruptions and cost volatility.",
+      "severity": "medium"
+    },
+    {
+      "category": "Execution Risk for New Ventures",
+      "description": "The successful scaling and profitability of new initiatives like robotaxi services and new vehicle models (e.g., six-seater Model Y L) are crucial but carry significant execution challenges.",
+      "severity": "medium"
+    }
+  ],
+  "latestNews": [
+    {
+      "title": "Tesla launches six-seater Model Y L in US to boost sales - Reuters",
+      "summary": "Tesla introduced a new six-seater long wheelbase version of its Model Y SUV in the U.S. market, aiming to stimulate sales of its best-selling electric vehicle.",
+      "sentiment": "positive"
+    },
+    {
+      "title": "Tesla quarterly deliveries set record; European recovery raises hopes of annual growth - Reuters",
+      "summary": "Tesla reported record quarterly deliveries for Q1 2025, with a notable recovery in the European market, fostering optimism for strong annual growth.",
+      "sentiment": "positive"
+    },
+    {
+      "title": "Tesla quietly rolls out limited robotaxi service in Miami - Automotive World",
+      "summary": "Tesla launched a limited robotaxi service in a geofenced area of Miami, marking its first expansion outside Texas for this autonomous driving offering.",
+      "sentiment": "positive"
+    },
+    {
+      "title": "Tesla Stock Rises After Company Reports Earnings Growth - WSJ",
+      "summary": "Tesla's stock increased following its latest earnings report, which showed quarterly revenue of $22.4 billion, exceeding estimates, and adjusted earnings growth.",
+      "sentiment": "positive"
+    }
+  ],
+  "scorecard": {
+    "financialHealth": 8,
+    "growth": 7,
+    "innovation": 9,
+    "competition": 7,
+    "risk": 6
+  },
+  "confidence": 85,
+  "decision": "INVEST",
+  "reason": "Tesla is a compelling investment due to its strong innovation in electric vehicles and autonomous driving, robust balance sheet with substantial cash reserves, and continued market expansion. While its high valuation and increasing competition present risks, its integrated ecosystem and powerful brand position it favorably for long-term growth in the global transition to sustainable energy."
+}
+```
