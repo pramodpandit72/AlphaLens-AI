@@ -54,8 +54,8 @@ The goal was to build something that feels like a professional AI SaaS product �
 ### Step 1 — Clone the repo
 
 ```bash
-git clone https://github.com/your-username/alphalens-ai.git
-cd alphalens-ai
+git clone https://github.com/pramodpandit72/AlphaLens-AI.git
+cd AlphaLens-AI
 ```
 
 ### Step 2 — Install dependencies
