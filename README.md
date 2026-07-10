@@ -1,3 +1,5 @@
+## Deployed Link: https://alpha-lens-ai-zeta.vercel.app/
+
 # AlphaLens AI — AI Investment Research Agent
 
 > AI-powered investment research in seconds. Enter any company name and get instant analysis with financial metrics, risk assessment, news sentiment, and a clear investment verdict.
@@ -6,7 +8,7 @@
 ![React](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react)
 ![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=flat-square&logo=node.js)
 ![LangChain](https://img.shields.io/badge/LangChain-JS-1C3C3C?style=flat-square)
-![Gemini](https://img.shields.io/badge/Gemini-2.5_Flash-4285F4?style=flat-square&logo=google)
+![Groq](https://img.shields.io/badge/Groq-Llama_3.3_70B-F55036?style=flat-square)
 
 ---
 
@@ -18,7 +20,7 @@ The user types a company name (e.g., "Apple", "Tesla", "Nvidia"). The system aut
 1. Searches the web for company info, news, and financial context using **Tavily**
 2. Fetches live financial metrics from **Yahoo Finance**
 3. Combines all data into a structured context
-4. Sends it to **Gemini 2.5 Flash** (via LangChain.js) for deep AI analysis
+4. Sends it to **Llama 3.3 70B** (via Groq + LangChain.js) for deep AI analysis
 5. Returns a clean **INVEST ✅ or PASS ❌** verdict with a confidence score and full report
 
 The goal was to build something that feels like a professional AI SaaS product — inspired by tools like Perplexity, Linear, and Vercel — not a generic student project.
@@ -46,7 +48,7 @@ The goal was to build something that feels like a professional AI SaaS product �
 
 - Node.js 18 or higher
 - npm
-- A Google AI API key ([get one here](https://ai.google.dev/))
+- A Groq API key ([get one free here](https://console.groq.com))
 - A Tavily API key ([get one here](https://tavily.com/))
 
 ### Step 1 — Clone the repo
@@ -73,7 +75,7 @@ npm install
 Create `server/.env`:
 ```env
 PORT=5000
-GOOGLE_API_KEY=your_google_gemini_api_key_here
+GROQ_API_KEY=your_groq_api_key_here
 TAVILY_API_KEY=your_tavily_api_key_here
 CLIENT_URL=http://localhost:5173
 ```
@@ -104,7 +106,7 @@ Open **http://localhost:5173** in your browser.
 | Variable | Where | Description | Required |
 |----------|-------|-------------|----------|
 | `PORT` | server/.env | Backend server port | No (default: 5000) |
-| `GOOGLE_API_KEY` | server/.env | Google Gemini AI key | ✅ Yes |
+| `GROQ_API_KEY` | server/.env | Groq API key (free at console.groq.com) | ✅ Yes |
 | `TAVILY_API_KEY` | server/.env | Tavily Search API key | ✅ Yes |
 | `CLIENT_URL` | server/.env | Frontend URL for CORS | No (default: *) |
 | `VITE_API_URL` | client/.env | Backend URL for the frontend | ✅ Yes |
@@ -139,8 +141,8 @@ User types company name
   │  (injects context into LLM   │
   │   prompt schema)             │
   │                              │
-  │  Step 5: Gemini 2.5 Flash    │
-  │  (via LangChain.js)          │
+  │  Step 5: Llama 3.3 70B       │
+  │  (via Groq + LangChain.js)   │
   │  → Returns structured JSON   │
   └──────────────────────────────┘
         ↓
@@ -157,7 +159,7 @@ User types company name
 | `server/services/financialService.js` | Fetches live data from Yahoo Finance |
 | `server/utils/contextBuilder.js` | Converts raw API data into clean text context for the LLM |
 | `server/prompts/analysisPrompt.js` | The master LLM prompt template with strict JSON schema |
-| `server/langchain/agent.js` | Runs the full AI pipeline with retry logic |
+| `server/langchain/agent.js` | Runs the full Groq/Llama AI pipeline with retry logic |
 | `server/controllers/analyzeController.js` | Orchestrates the pipeline, deduplicates concurrent requests |
 
 ---
@@ -288,7 +290,7 @@ Health check. Returns `{ "status": "ok" }`.
 
 | Decision | What I chose | Why | What I left out |
 |----------|-------------|-----|-----------------|
-| **LLM** | Gemini 2.5 Flash | Fast, free tier available, best-in-class JSON mode | GPT-4o (paid, no free tier) |
+| **LLM** | Llama 3.3 70B via Groq | Free tier, extremely fast inference, no org restrictions on API keys | GPT-4o (paid), Gemini (org account auth issues) |
 | **Search API** | Tavily | Built for AI agents, returns clean structured results | Serper (raw HTML, harder to parse) |
 | **Financial Data** | Yahoo Finance (yahoo-finance2) | Free, no API key required, comprehensive coverage | Financial Modeling Prep (requires paid key for full data) |
 | **LLM Framework** | LangChain.js | Industry standard, great prompt templating, Gemini support | Direct API calls (less maintainable) |
@@ -335,13 +337,15 @@ Health check. Returns `{ "status": "ok" }`.
 6. **WebSocket loading** — Push real-time step-by-step progress updates to the frontend during analysis
 7. **User authentication** — Save analysis history and build a personal dashboard
 8. **Prompt optimization** — Fine-tune the prompt with few-shot examples to reduce JSON parse errors
-9. **Rate limit management** — Smart request queue that respects Gemini API tier limits automatically
+9. **Rate limit management** — Smart request queue that respects Groq API tier limits automatically
 
 ---
 
 ## AI / LLM Used
 
-This project was built using **Google Gemini 2.5 Flash** as the core LLM, accessed via the **LangChain.js** framework.
+This project was built using **Llama 3.3 70B** as the core LLM, accessed via **Groq** (free-tier API) and the **LangChain.js** framework.
+
+> **Note on LLM choice:** The project was originally designed for Google Gemini 2.5 Flash. During development, Google's organizational account policies blocked standard API key generation (returning OAuth tokens instead of API keys). Groq was chosen as the production LLM because it offers a free, reliable API key (`gsk_...` format) with no organizational restrictions, fast inference, and excellent JSON output quality via Llama 3.3 70B.
 
 The entire development process was assisted by an AI coding assistant (Antigravity IDE). The full chat session transcript documenting every conversation, debugging session, and architectural decision made during development is included in **`LLM_CHAT_TRANSCRIPT.md`** in the project root.
 
@@ -360,7 +364,7 @@ The entire development process was assisted by an AI coding assistant (Antigravi
 1. Create Web Service on Render, set root directory to `server/`
 2. Build command: `npm install`
 3. Start command: `node index.js`
-4. Add env variables: `GOOGLE_API_KEY`, `TAVILY_API_KEY`, `CLIENT_URL`
+4. Add env variables: `GROQ_API_KEY`, `TAVILY_API_KEY`, `CLIENT_URL`
 
 ---
 
@@ -371,7 +375,7 @@ The entire development process was assisted by an AI coding assistant (Antigravi
 | **Frontend** | React 19, Vite, Tailwind CSS v4.3, React Router v7, Axios |
 | **Backend** | Node.js, Express.js v5 |
 | **AI Framework** | LangChain.js |
-| **LLM** | Google Gemini 2.5 Flash |
+| **LLM** | Llama 3.3 70B via Groq (free tier) |
 | **Search** | Tavily Search API |
 | **Financial Data** | Yahoo Finance (yahoo-finance2) |
 | **Deployment** | Vercel (frontend) + Render (backend) |

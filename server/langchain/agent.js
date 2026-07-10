@@ -1,4 +1,4 @@
-import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
+import { ChatGroq } from '@langchain/groq';
 import { PromptTemplate } from '@langchain/core/prompts';
 import { ANALYSIS_PROMPT } from '../prompts/analysisPrompt.js';
 import { buildSearchContext, buildFinancialContext } from '../utils/contextBuilder.js';
@@ -7,7 +7,7 @@ import { buildSearchContext, buildFinancialContext } from '../utils/contextBuild
  * Runs the full AI analysis pipeline:
  * 1. Build context from search + financial data
  * 2. Format the prompt template
- * 3. Send to Gemini 2.5 Flash
+ * 3. Send to Llama 3.3 70B via Groq
  * 4. Parse and validate JSON response
  */
 export const runAnalysis = async (companyName, searchResults, financialData) => {
@@ -23,14 +23,13 @@ export const runAnalysis = async (companyName, searchResults, financialData) => 
     financialContext,
   });
 
-  // Step 3: Initialize Gemini model with higher built-in retries
-  const model = new ChatGoogleGenerativeAI({
-    model: 'gemini-2.5-flash',
-    apiKey: process.env.GOOGLE_API_KEY,
+  // Step 3: Initialize Groq model
+  const model = new ChatGroq({
+    model: 'llama-3.3-70b-versatile',
+    apiKey: process.env.GROQ_API_KEY,
     temperature: 0.3,
-    maxOutputTokens: 4096,
-    maxRetries: 3, // Increased from 1 to 3 to help handle immediate 429s
-    responseMimeType: 'application/json',
+    maxTokens: 4096,
+    maxRetries: 3,
   });
 
   // Step 4: Attempt to run the model and parse the response with a manual retry loop
@@ -56,7 +55,7 @@ export const runAnalysis = async (companyName, searchResults, financialData) => 
       lastError = error;
 
       if (attempt < maxAttempts) {
-        // If it's a rate limit error, wait a significant amount of time before retrying
+        // If it's a rate limit error, wait before retrying
         if (error.message.includes('429') || error.message.includes('Too Many Requests') || error.message.includes('quota')) {
           console.log(`⏳ Rate limit hit. Waiting 20 seconds before next attempt...`);
           await new Promise(resolve => setTimeout(resolve, 20000));
