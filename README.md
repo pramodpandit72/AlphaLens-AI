@@ -303,27 +303,33 @@ Health check. Returns `{ "status": "ok" }`.
 
 ## Example Runs
 
-### Apple (AAPL) — INVEST ✅ (88% confidence)
+### Apple (AAPL) — INVEST ✅ (85% confidence)
 
-> Apple's dominant ecosystem lock-in, massive $94B annual net profit, and rapidly growing Services segment ($100B+/year) create a formidable moat. The company's AI integration into iOS through Apple Intelligence positions it well for the next tech cycle. Despite premium valuation (P/E ~31x) and slowing iPhone growth in China, Apple's financial fortress and proven ability to monetize its 2 billion+ device base make it a strong long-term INVEST.
+> Apple's strong brand, continuous innovation, and diversified revenue streams position it well for long-term growth. Despite risks and competition, the company's financial health, high profit margins, and significant R&D investments support a positive outlook. Apple's ability to navigate challenges and capitalize on emerging opportunities — including the $30B+ Broadcom chip deal and upcoming iPhone Air 2 — reinforce its long-term investment case.
 
-**Scores:** Financial Health: 9 | Growth: 7 | Innovation: 9 | Competition: 8 | Risk: 7
+**Financials:** Revenue: $451.44B | Net Profit: $94.68B | Market Cap: $4.60T | P/E: 37.98 | EPS: $8.25 | Profit Margin: 27.15%
 
----
-
-### Tesla (TSLA) — PASS ❌ (55% confidence)
-
-> Tesla faces growing competition from BYD and legacy OEMs eroding its EV market share, combined with declining margins as it cuts prices to maintain volume. While Autopilot/FSD and the energy business offer upside, current valuation at 60x+ P/E is extremely demanding for a maturing auto company. Without clear near-term revenue catalysts, the risk/reward skews unfavorable.
-
-**Scores:** Financial Health: 6 | Growth: 7 | Innovation: 8 | Competition: 5 | Risk: 4
+**Scores:** Financial Health: 8 | Growth: 7 | Innovation: 9 | Competition: 7 | Risk: 6
 
 ---
 
-### Nvidia (NVDA) — INVEST ✅ (92% confidence)
+### Tesla (TSLA) — INVEST ✅ (85% confidence)
 
-> Nvidia's monopoly-like dominance in AI training chips (80%+ datacenter GPU market share), combined with its CUDA software ecosystem that creates extremely high switching costs, makes it the defining infrastructure company of the AI era. Revenue grew 122% YoY. The transition from gaming GPU maker to AI compute platform is complete, and demand from hyperscalers shows no signs of slowing.
+> Tesla's strong brand recognition, innovative products and services, and growing energy business make it an attractive investment opportunity. While the company faces risks — including a high P/E of 372x and intense competition — its expanding robotaxi service in Miami, energy segment growth, and leadership in the EV market provide a positive long-term outlook.
 
-**Scores:** Financial Health: 9 | Growth: 10 | Innovation: 10 | Competition: 8 | Risk: 6
+**Financials:** Revenue: $97.88B | Net Profit: $3.95B | Market Cap: $1.54T | P/E: 372.63 | EPS: $1.10 | Profit Margin: 3.95%
+
+**Scores:** Financial Health: 8 | Growth: 7 | Innovation: 9 | Competition: 7 | Risk: 6
+
+---
+
+### Nvidia (NVDA) — INVEST ✅ (85% confidence)
+
+> NVIDIA's strong revenue growth, high profit margin of 62.97%, and leadership in AI semiconductors make it an attractive long-term investment. Its diversified product portfolio spanning gaming, AI training, and autonomous vehicles — combined with collaborations like Hugging Face's LeRobot partnership — creates significant competitive moats. Despite competition and regulatory risks, NVIDIA's innovation pipeline and financial strength strongly support an INVEST verdict.
+
+**Financials:** Revenue: $60.92B | Net Profit: $15.82B | Market Cap: $5.07T | P/E: 32.05 | EPS: $6.53 | Profit Margin: 62.97%
+
+**Scores:** Financial Health: 8 | Growth: 9 | Innovation: 9 | Competition: 7 | Risk: 6
 
 ---
 
