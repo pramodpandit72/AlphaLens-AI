@@ -23,23 +23,54 @@ export const runAnalysis = async (companyName, searchResults, financialData) => 
     financialContext,
   });
 
-  // Step 3: Initialize Gemini model
+  // Step 3: Initialize Gemini model with higher built-in retries
   const model = new ChatGoogleGenerativeAI({
     model: 'gemini-2.5-flash',
     apiKey: process.env.GOOGLE_API_KEY,
     temperature: 0.3,
     maxOutputTokens: 4096,
-    maxRetries: 1,
+    maxRetries: 3, // Increased from 1 to 3 to help handle immediate 429s
     responseMimeType: 'application/json',
   });
 
-  // Step 4: Invoke the model
-  const response = await model.invoke(formattedPrompt);
+  // Step 4: Attempt to run the model and parse the response with a manual retry loop
+  let lastError = null;
+  const maxAttempts = 3;
 
-  // Step 5: Parse the JSON response
-  const analysis = parseAnalysisResponse(response.content);
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      if (attempt > 1) {
+        console.log(`\n🔄 Retry attempt ${attempt} for ${companyName}...`);
+      }
 
-  return analysis;
+      // Invoke the model
+      const response = await model.invoke(formattedPrompt);
+
+      // Parse the JSON response
+      const analysis = parseAnalysisResponse(response.content);
+
+      // If successful, return the parsed analysis
+      return analysis;
+    } catch (error) {
+      console.error(`❌ Attempt ${attempt} failed for ${companyName}: ${error.message}`);
+      lastError = error;
+
+      if (attempt < maxAttempts) {
+        // If it's a rate limit error, wait a significant amount of time before retrying
+        if (error.message.includes('429') || error.message.includes('Too Many Requests') || error.message.includes('quota')) {
+          console.log(`⏳ Rate limit hit. Waiting 20 seconds before next attempt...`);
+          await new Promise(resolve => setTimeout(resolve, 20000));
+        } else {
+          // If it was a JSON parsing error, just wait a brief moment and try again
+          console.log(`⏳ Formatting error. Retrying in 2 seconds...`);
+          await new Promise(resolve => setTimeout(resolve, 2000));
+        }
+      }
+    }
+  }
+
+  // If we exhausted all attempts, throw the last error
+  throw lastError || new Error(`Failed to generate analysis for ${companyName} after ${maxAttempts} attempts.`);
 };
 
 /**

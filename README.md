@@ -1,6 +1,6 @@
 # AlphaLens AI — AI Investment Research Agent
 
-> AI-powered investment research in seconds. Enter any company name and get instant analysis with financial metrics, risk assessment, and investment recommendations.
+> AI-powered investment research in seconds. Enter any company name and get instant analysis with financial metrics, risk assessment, news sentiment, and a clear investment verdict.
 
 ![AlphaLens AI](https://img.shields.io/badge/AlphaLens-AI-6366f1?style=for-the-badge)
 ![React](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react)
@@ -12,140 +12,232 @@
 
 ## Overview
 
-AlphaLens AI is a full-stack web application that uses AI to analyze any publicly traded company and provide investment recommendations. It combines real-time web search, financial data, and AI analysis to deliver professional-grade research reports.
+**AlphaLens AI** is a full-stack AI agent web application that analyzes any publicly traded company and delivers a professional-grade investment research report — in seconds.
 
-### Key Features
+The user types a company name (e.g., "Apple", "Tesla", "Nvidia"). The system automatically:
+1. Searches the web for company info, news, and financial context using **Tavily**
+2. Fetches live financial metrics from **Yahoo Finance**
+3. Combines all data into a structured context
+4. Sends it to **Gemini 2.5 Flash** (via LangChain.js) for deep AI analysis
+5. Returns a clean **INVEST ✅ or PASS ❌** verdict with a confidence score and full report
 
-- 🔍 **AI Research** — Searches multiple sources for company information
-- 📊 **Financial Analysis** — Real-time financial metrics from Yahoo Finance
-- 📰 **Latest News** — Aggregates recent company news with sentiment analysis
-- 🛡️ **Risk Detection** — Identifies and categorizes investment risks
-- ✅ **Investment Recommendation** — Clear INVEST/PASS verdict with confidence score
-
----
-
-## Architecture
-
-```
-User Input → Frontend (React)
-                ↓
-           Backend (Express)
-                ↓
-    ┌───────────┼───────────┐
-    ↓           ↓           ↓
- Tavily     Yahoo       Context
- Search     Finance     Builder
-    ↓           ↓           ↓
-    └───────────┼───────────┘
-                ↓
-        Prompt Template
-                ↓
-        Gemini 2.5 Flash
-           (LangChain)
-                ↓
-        Structured JSON
-                ↓
-        Frontend Report
-```
+The goal was to build something that feels like a professional AI SaaS product — inspired by tools like Perplexity, Linear, and Vercel — not a generic student project.
 
 ---
 
-## Tech Stack
+## Key Features
 
-| Layer | Technology |
-|-------|-----------|
-| **Frontend** | React 19, Vite, Tailwind CSS v4.3, React Router, Axios |
-| **Backend** | Node.js, Express.js |
-| **AI Framework** | LangChain.js |
-| **LLM** | Google Gemini 2.5 Flash |
-| **Search** | Tavily Search API |
-| **Financial Data** | Yahoo Finance (via yahoo-finance2) |
-| **Deployment** | Vercel (frontend), Render (backend) |
+| Feature | Description |
+|---------|-------------|
+| 🔍 **AI Research Agent** | Runs 3 parallel Tavily searches: company overview, recent news, and financial news |
+| 📊 **Live Financial Data** | Revenue, Market Cap, P/E ratio, EPS, profit margins from Yahoo Finance |
+| 📰 **News Sentiment** | Latest headlines with positive/negative/neutral sentiment tagging |
+| 🛡️ **Risk Profiling** | Identifies and categorizes business, regulatory, competition & market risks |
+| 📈 **Score Cards** | Scores (1-10) for Financial Health, Growth, Innovation, Competition, and Risk |
+| ✅ **Invest/Pass Verdict** | Clear recommendation with confidence % and detailed AI reasoning |
+| 🔄 **Auto-Retry Logic** | Automatically retries on rate-limit (429) or JSON parsing errors (up to 3 attempts) |
+| 📱 **Fully Responsive** | Clean, modern UI that works on mobile, tablet, and desktop |
 
 ---
 
-## Installation
+## How to Run It
 
 ### Prerequisites
 
-- Node.js 18+
-- npm or yarn
-- API keys for Google AI and Tavily
+- Node.js 18 or higher
+- npm
+- A Google AI API key ([get one here](https://ai.google.dev/))
+- A Tavily API key ([get one here](https://tavily.com/))
 
-### 1. Clone the repository
+### Step 1 — Clone the repo
 
 ```bash
 git clone https://github.com/your-username/alphalens-ai.git
 cd alphalens-ai
 ```
 
-### 2. Install dependencies
+### Step 2 — Install dependencies
 
 ```bash
-# Install server dependencies
+# Backend
 cd server
 npm install
 
-# Install client dependencies
-cd ../client
+# Frontend (in a new terminal)
+cd client
 npm install
 ```
 
-### 3. Set up environment variables
+### Step 3 — Set up environment variables
 
-**Server** (`server/.env`):
+Create `server/.env`:
 ```env
 PORT=5000
-GOOGLE_API_KEY=your_google_api_key
-TAVILY_API_KEY=your_tavily_api_key
+GOOGLE_API_KEY=your_google_gemini_api_key_here
+TAVILY_API_KEY=your_tavily_api_key_here
+CLIENT_URL=http://localhost:5173
 ```
 
-**Client** (`client/.env`):
+Create `client/.env`:
 ```env
 VITE_API_URL=http://localhost:5000
 ```
 
-### 4. Start development servers
+### Step 4 — Run the app
 
 ```bash
-# Terminal 1: Start backend
+# Terminal 1 — Backend
 cd server
-npm run dev
+npm start
 
-# Terminal 2: Start frontend
+# Terminal 2 — Frontend
 cd client
 npm run dev
 ```
 
-The frontend runs on `http://localhost:5173` and the backend on `http://localhost:5000`.
+Open **http://localhost:5173** in your browser.
 
 ---
 
 ## Environment Variables
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `PORT` | Backend server port | No (default: 5000) |
-| `GOOGLE_API_KEY` | Google AI API key for Gemini | Yes |
-| `TAVILY_API_KEY` | Tavily Search API key | Yes |
-| `VITE_API_URL` | Backend API URL for frontend | Yes |
+| Variable | Where | Description | Required |
+|----------|-------|-------------|----------|
+| `PORT` | server/.env | Backend server port | No (default: 5000) |
+| `GOOGLE_API_KEY` | server/.env | Google Gemini AI key | ✅ Yes |
+| `TAVILY_API_KEY` | server/.env | Tavily Search API key | ✅ Yes |
+| `CLIENT_URL` | server/.env | Frontend URL for CORS | No (default: *) |
+| `VITE_API_URL` | client/.env | Backend URL for the frontend | ✅ Yes |
 
 ---
 
-## API Endpoints
+## How It Works — Architecture
+
+```
+User types company name
+        ↓
+  React Frontend (Vite)
+        ↓ POST /api/analyze
+  Express.js Backend
+        ↓
+  ┌──────────────────────────────┐
+  │     AI Agent Pipeline        │
+  │                              │
+  │  Step 1: Tavily Search       │
+  │  (3 parallel searches)       │
+  │    - Company overview        │
+  │    - Recent news             │
+  │    - Financial news          │
+  │                              │
+  │  Step 2: Yahoo Finance       │
+  │  (live financial metrics)    │
+  │                              │
+  │  Step 3: Context Builder     │
+  │  (structures all raw data)   │
+  │                              │
+  │  Step 4: Prompt Template     │
+  │  (injects context into LLM   │
+  │   prompt schema)             │
+  │                              │
+  │  Step 5: Gemini 2.5 Flash    │
+  │  (via LangChain.js)          │
+  │  → Returns structured JSON   │
+  └──────────────────────────────┘
+        ↓
+  Validated & Parsed JSON
+        ↓
+  React Analysis Dashboard
+```
+
+### Key Modules
+
+| File | Role |
+|------|------|
+| `server/services/searchService.js` | Calls Tavily with 3 parallel search queries |
+| `server/services/financialService.js` | Fetches live data from Yahoo Finance |
+| `server/utils/contextBuilder.js` | Converts raw API data into clean text context for the LLM |
+| `server/prompts/analysisPrompt.js` | The master LLM prompt template with strict JSON schema |
+| `server/langchain/agent.js` | Runs the full AI pipeline with retry logic |
+| `server/controllers/analyzeController.js` | Orchestrates the pipeline, deduplicates concurrent requests |
+
+---
+
+## Folder Structure
+
+```
+alphalens-ai/
+├── client/                        # React frontend (Vite)
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── analysis/          # All analysis page components
+│   │   │   │   ├── CompanyCard.jsx
+│   │   │   │   ├── DecisionCard.jsx
+│   │   │   │   ├── FinancialCards.jsx
+│   │   │   │   ├── LoadingState.jsx
+│   │   │   │   ├── NewsList.jsx
+│   │   │   │   ├── ReasoningSection.jsx
+│   │   │   │   ├── RiskAnalysis.jsx
+│   │   │   │   ├── ScoreCards.jsx
+│   │   │   │   └── StrengthsWeaknesses.jsx
+│   │   │   ├── Hero.jsx           # Landing page hero + search box
+│   │   │   ├── Features.jsx       # Feature cards
+│   │   │   ├── HowItWorks.jsx     # 3-step process section
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── Footer.jsx
+│   │   │   └── CTA.jsx
+│   │   ├── hooks/
+│   │   │   └── useAnalysis.js     # Analysis state management hook
+│   │   ├── layouts/
+│   │   │   └── MainLayout.jsx
+│   │   ├── pages/
+│   │   │   ├── HomePage.jsx
+│   │   │   └── AnalysisPage.jsx
+│   │   ├── services/
+│   │   │   └── api.js             # Axios API client
+│   │   └── App.jsx
+│   ├── vercel.json
+│   └── vite.config.js
+│
+├── server/                        # Node.js + Express backend
+│   ├── controllers/
+│   │   └── analyzeController.js   # Main controller with in-flight dedup
+│   ├── langchain/
+│   │   └── agent.js               # Gemini LLM + retry logic
+│   ├── middleware/
+│   │   └── errorHandler.js        # Global error handling
+│   ├── prompts/
+│   │   └── analysisPrompt.js      # Master LLM prompt template
+│   ├── routes/
+│   │   └── analyzeRoutes.js
+│   ├── services/
+│   │   ├── searchService.js       # Tavily search (3 parallel queries)
+│   │   └── financialService.js    # Yahoo Finance data
+│   ├── utils/
+│   │   └── contextBuilder.js      # Data → LLM-ready text converter
+│   ├── index.js                   # Server entry point
+│   └── render.yaml                # Render deployment config
+│
+├── LLM_CHAT_TRANSCRIPT.md         # 🤖 Full AI chat session log (bonus)
+├── README.md
+└── .gitignore
+```
+
+---
+
+## API Reference
 
 ### `POST /api/analyze`
 
-Analyzes a company and returns an investment recommendation.
+Runs the full AI analysis pipeline for a given company.
 
-**Request:**
+**Request Body:**
 ```json
 {
   "company": "Apple"
 }
 ```
 
-**Response:**
+**Success Response (200):**
 ```json
 {
   "success": true,
@@ -153,12 +245,26 @@ Analyzes a company and returns an investment recommendation.
     "company": "Apple Inc.",
     "ticker": "AAPL",
     "industry": "Consumer Electronics",
-    "basicInfo": { ... },
-    "financials": { ... },
-    "strengths": [ ... ],
-    "weaknesses": [ ... ],
-    "risks": [ ... ],
-    "latestNews": [ ... ],
+    "basicInfo": {
+      "ceo": "Tim Cook",
+      "headquarters": "Cupertino, CA, USA",
+      "founded": "1976",
+      "employees": "150,000+",
+      "website": "apple.com"
+    },
+    "financials": {
+      "revenue": "$391.0B",
+      "netProfit": "$93.7B",
+      "marketCap": "$3.1T",
+      "peRatio": "31.4",
+      "eps": "$6.13",
+      "revenueGrowth": "+2.0%",
+      "profitMargin": "24.0%"
+    },
+    "strengths": ["..."],
+    "weaknesses": ["..."],
+    "risks": [{ "category": "...", "description": "...", "severity": "medium" }],
+    "latestNews": [{ "title": "...", "summary": "...", "sentiment": "positive" }],
     "scorecard": {
       "financialHealth": 9,
       "growth": 7,
@@ -168,66 +274,76 @@ Analyzes a company and returns an investment recommendation.
     },
     "confidence": 88,
     "decision": "INVEST",
-    "reason": "..."
+    "reason": "Apple's dominant ecosystem, strong cash generation, and expanding services segment make it a compelling long-term investment despite near-term iPhone saturation concerns."
   }
 }
 ```
 
 ### `GET /api/health`
-
-Health check endpoint.
-
----
-
-## Folder Structure
-
-```
-alphalens-ai/
-├── client/                    # React frontend
-│   ├── src/
-│   │   ├── components/        # Reusable UI components
-│   │   │   ├── analysis/      # Analysis page components
-│   │   │   ├── Navbar.jsx
-│   │   │   ├── Hero.jsx
-│   │   │   ├── Features.jsx
-│   │   │   ├── HowItWorks.jsx
-│   │   │   ├── CTA.jsx
-│   │   │   └── Footer.jsx
-│   │   ├── hooks/             # Custom React hooks
-│   │   ├── layouts/           # Layout wrappers
-│   │   ├── pages/             # Page components
-│   │   └── services/          # API service layer
-│   ├── vercel.json            # Vercel deployment config
-│   └── vite.config.js         # Vite + Tailwind config
-│
-├── server/                    # Express backend
-│   ├── controllers/           # Request handlers
-│   ├── langchain/             # AI agent pipeline
-│   ├── middleware/             # Express middleware
-│   ├── prompts/               # LLM prompt templates
-│   ├── routes/                # API routes
-│   ├── services/              # External API integrations
-│   ├── utils/                 # Utility functions
-│   ├── index.js               # Server entry point
-│   └── render.yaml            # Render deployment config
-│
-├── .env.example               # Environment variable template
-├── .gitignore
-└── README.md
-```
+Health check. Returns `{ "status": "ok" }`.
 
 ---
 
-## AI Workflow
+## Key Decisions & Trade-offs
 
-The AI pipeline follows a structured agent workflow:
+| Decision | What I chose | Why | What I left out |
+|----------|-------------|-----|-----------------|
+| **LLM** | Gemini 2.5 Flash | Fast, free tier available, best-in-class JSON mode | GPT-4o (paid, no free tier) |
+| **Search API** | Tavily | Built for AI agents, returns clean structured results | Serper (raw HTML, harder to parse) |
+| **Financial Data** | Yahoo Finance (yahoo-finance2) | Free, no API key required, comprehensive coverage | Financial Modeling Prep (requires paid key for full data) |
+| **LLM Framework** | LangChain.js | Industry standard, great prompt templating, Gemini support | Direct API calls (less maintainable) |
+| **Single LLM call** | One large prompt | Faster, fewer API calls, lower rate-limit risk | Multi-agent chains (slower, more complex) |
+| **No database** | Stateless per-request | Simpler deployment, no infra cost | Redis caching (would fix rate limits in production) |
+| **In-flight dedup** | Map of active promises | Prevents React StrictMode double-calling the API | Full request queue (overkill for this scale) |
+| **Auto retry logic** | 3 attempts with smart wait | Handles 429 rate limits and AI JSON errors gracefully | Full exponential backoff (unnecessary at this scale) |
 
-1. **Search Phase** — Tavily API searches for company info, recent news, and financial analysis (3 parallel searches)
-2. **Financial Phase** — Yahoo Finance fetches real-time financial metrics (auto-resolves company name to ticker)
-3. **Context Building** — All gathered data is structured into a comprehensive context string
-4. **Prompt Engineering** — Context is injected into a detailed prompt template with strict JSON schema requirements
-5. **LLM Analysis** — Gemini 2.5 Flash analyzes the context and generates a structured research report
-6. **Validation** — Response is parsed, validated, and scores are clamped to valid ranges
+---
+
+## Example Runs
+
+### Apple (AAPL) — INVEST ✅ (88% confidence)
+
+> Apple's dominant ecosystem lock-in, massive $94B annual net profit, and rapidly growing Services segment ($100B+/year) create a formidable moat. The company's AI integration into iOS through Apple Intelligence positions it well for the next tech cycle. Despite premium valuation (P/E ~31x) and slowing iPhone growth in China, Apple's financial fortress and proven ability to monetize its 2 billion+ device base make it a strong long-term INVEST.
+
+**Scores:** Financial Health: 9 | Growth: 7 | Innovation: 9 | Competition: 8 | Risk: 7
+
+---
+
+### Tesla (TSLA) — PASS ❌ (55% confidence)
+
+> Tesla faces growing competition from BYD and legacy OEMs eroding its EV market share, combined with declining margins as it cuts prices to maintain volume. While Autopilot/FSD and the energy business offer upside, current valuation at 60x+ P/E is extremely demanding for a maturing auto company. Without clear near-term revenue catalysts, the risk/reward skews unfavorable.
+
+**Scores:** Financial Health: 6 | Growth: 7 | Innovation: 8 | Competition: 5 | Risk: 4
+
+---
+
+### Nvidia (NVDA) — INVEST ✅ (92% confidence)
+
+> Nvidia's monopoly-like dominance in AI training chips (80%+ datacenter GPU market share), combined with its CUDA software ecosystem that creates extremely high switching costs, makes it the defining infrastructure company of the AI era. Revenue grew 122% YoY. The transition from gaming GPU maker to AI compute platform is complete, and demand from hyperscalers shows no signs of slowing.
+
+**Scores:** Financial Health: 9 | Growth: 10 | Innovation: 10 | Competition: 8 | Risk: 6
+
+---
+
+## What I Would Improve With More Time
+
+1. **Caching with Redis** — Cache company analysis for 30 minutes so repeated requests don't consume API quota
+2. **Multi-company comparison** — Let users compare 2-3 companies side by side
+3. **Historical analysis** — Show how a company's AI score has changed over time with PostgreSQL storage
+4. **PDF Export** — Generate a downloadable professional report using Puppeteer or jsPDF
+5. **Real-time stock charts** — Embed a live price chart from TradingView or Yahoo Finance
+6. **WebSocket loading** — Push real-time step-by-step progress updates to the frontend during analysis
+7. **User authentication** — Save analysis history and build a personal dashboard
+8. **Prompt optimization** — Fine-tune the prompt with few-shot examples to reduce JSON parse errors
+9. **Rate limit management** — Smart request queue that respects Gemini API tier limits automatically
+
+---
+
+## AI / LLM Used
+
+This project was built using **Google Gemini 2.5 Flash** as the core LLM, accessed via the **LangChain.js** framework.
+
+The entire development process was assisted by an AI coding assistant (Antigravity IDE). The full chat session transcript documenting every conversation, debugging session, and architectural decision made during development is included in **`LLM_CHAT_TRANSCRIPT.md`** in the project root.
 
 ---
 
@@ -235,44 +351,30 @@ The AI pipeline follows a structured agent workflow:
 
 ### Frontend → Vercel
 
-1. Push code to GitHub
-2. Import project in Vercel
-3. Set root directory to `client`
-4. Add environment variable `VITE_API_URL` with your Render backend URL
+1. Push to GitHub
+2. Import project in Vercel, set root directory to `client/`
+3. Add env variable: `VITE_API_URL=https://your-render-backend.onrender.com`
 
 ### Backend → Render
 
-1. Create a new Web Service on Render
-2. Set root directory to `server`
-3. Build command: `npm install`
-4. Start command: `node index.js`
-5. Add environment variables: `GOOGLE_API_KEY`, `TAVILY_API_KEY`
+1. Create Web Service on Render, set root directory to `server/`
+2. Build command: `npm install`
+3. Start command: `node index.js`
+4. Add env variables: `GOOGLE_API_KEY`, `TAVILY_API_KEY`, `CLIENT_URL`
 
 ---
 
-## Trade-offs & Design Decisions
+## Tech Stack Summary
 
-| Decision | Reasoning |
-|----------|-----------|
-| **Yahoo Finance over Financial Modeling Prep** | Free, no API key required, comprehensive data |
-| **Tavily over Serper** | Better structured results, built for AI applications |
-| **LangChain.js** | Industry standard for LLM orchestration, good Gemini support |
-| **Tailwind CSS v4.3** | Latest CSS-first approach, no config file needed |
-| **No database** | Stateless design — each analysis is a fresh API call. Simplifies deployment |
-| **Single LLM call** | All analysis in one prompt rather than multiple chain calls — faster, cheaper |
-
----
-
-## Future Improvements
-
-- [ ] Add comparison feature (compare two companies)
-- [ ] Historical analysis caching with Redis/PostgreSQL
-- [ ] User authentication and saved reports
-- [ ] Portfolio tracking dashboard
-- [ ] Real-time stock price charts
-- [ ] PDF report export
-- [ ] WebSocket for real-time loading updates
-- [ ] Multi-language support
+| Layer | Technology |
+|-------|-----------|
+| **Frontend** | React 19, Vite, Tailwind CSS v4.3, React Router v7, Axios |
+| **Backend** | Node.js, Express.js v5 |
+| **AI Framework** | LangChain.js |
+| **LLM** | Google Gemini 2.5 Flash |
+| **Search** | Tavily Search API |
+| **Financial Data** | Yahoo Finance (yahoo-finance2) |
+| **Deployment** | Vercel (frontend) + Render (backend) |
 
 ---
 

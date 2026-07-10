@@ -25,3 +25,5 @@ npm-debug.log*
 
 # Project spec (not for repo)
 description.md
+
+LLM_CHAT_TRANSCRIPT.md
